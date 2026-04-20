@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garden Studio</title>
+
+  <style>
+    :root {
+      --grass-dark: #1f3d2b;
+      --grass-medium: #3e6f4e;
+      --grass-light: #8fc9a3;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      color: var(--grass-dark);
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('cesped.png') center/cover no-repeat fixed;
+      filter: blur(3px) brightness(0.7);
+      z-index: -2;
+    }
+
+    .overlay {
+      background: rgba(255,255,255,0.15); /* muy ligera superposición */
+      min-height: 100vh;
+      animation: fadeIn 1.5s ease-in;
+      z-index: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      background: rgba(31,61,43,0.6);
+      color: var(--white);
+      text-align: center;
+      padding: 6rem 1rem;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3.2rem;
+      margin: 0;
+      letter-spacing: 3px;
+      animation: grow 1.2s ease-out;
+      color: #fff;
+      text-shadow:
+        2px 2px 0 #000,
+        -2px 2px 0 #000,
+        2px -2px 0 #000,
+        -2px -2px 0 #000,
+        0 0 10px #fff,
+        0 0 20px #fff;
+    }
+
+    @keyframes grow {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    nav {
+      background-color: var(--grass-dark);
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav select {
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: none;
+      background-color: var(--grass-light);
+      color: var(--grass-dark);
+      font-weight: bold;
+    }
+
+    section {
+      padding: 3.5rem 1.5rem;
+      max-width: 1100px;
+      margin: auto;
+      animation: fadeUp 1.2s ease-in;
+    }
+
+    @keyframes fadeUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(242,250,245,0.9));
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      margin-bottom: 2.5rem;
+    }
+
+    .ai-box {
+      border: 2px solid var(--grass-medium);
+      border-radius: 20px;
+      padding: 2rem;
+      background-color: rgba(240,251,245,0.9);
+    }
+
+    .ai-box input {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 12px;
+      border: 1px solid var(--grass-medium);
+      margin-top: 1rem;
+    }
+
+    .ai-response {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #e3f6ec;
+      border-radius: 12px;
+      display: none;
+    }
+
+    footer {
+      background: linear-gradient(180deg, var(--grass-dark), #102218);
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .socials a {
+      color: var(--grass-light);
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="overlay">
+
+<header>
+  <h1>GARDEN STUDIO</h1>
+  <p data-i18n="tagline">An indie studio growing from the ground up 🌱</p>
+</header>
+
+<nav>
+  <select id="languageSelect">
+    <option value="en">English</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="de">Deutsch</option>
+  </select>
+</nav>
+
+<section>
+  <div class="card">
+    <h2 data-i18n="aboutTitle">About Garden Studio</h2>
+    <p data-i18n="aboutText"></p>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2 data-i18n="gameTitle">Garden Shadows – Coming Soon</h2>
+    <p data-i18n="gameText"></p>
+  </div>
+</section>
+
+<section>
+  <div class="ai-box">
+    <h2 data-i18n="aiTitle">AI Assistant 🌱</h2>
+    <p data-i18n="aiText"></p>
+    <input type="text" id="aiInput" placeholder="Ask a question..." />
+    <div class="ai-response" id="aiResponse"></div>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2 data-i18n="contactTitle">Contact</h2>
+    <p>📧 gardenstudioficial@gmail.com</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Garden Studio · Indie Game Studio</p>
+  <div class="socials">
+    <a href="https://x.com/gardenstudi0?s=21" target="_blank">X</a>
+    <a href="https://www.tiktok.com/@gardenstudioficial" target="_blank">TikTok</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+const translations = {
+  en: {
+    tagline: "An indie studio growing from the ground up 🌱",
+    aboutTitle: "About Garden Studio",
+    aboutText: "Garden Studio is a small indie studio at the beginning of its journey. We are working on our first video game and sharing progress on social media.",
+    gameTitle: "Garden Shadows – Coming Soon",
+    gameText: "Our first indie game is currently in development. Follow our social networks to see updates and behind-the-scenes content.",
+    aiTitle: "AI Assistant 🌱",
+    aiText: "Ask about the studio or our game.",
+    contactTitle: "Contact",
+    aiAnswer: "We are working on our first indie game. Follow us on social media for updates."
+  },
+  es: {
+    tagline: "Un estudio indie que empieza a crecer 🌱",
+    aboutTitle: "Sobre Garden Studio",
+    aboutText: "Garden Studio es un pequeño estudio indie que está comenzando. Estamos desarrollando nuestro primer videojuego y compartiendo avances en redes sociales.",
+    gameTitle: "Garden Shadows – Próximamente",
+    gameText: "Nuestro primer videojuego indie está en desarrollo. Síguenos en redes sociales para ver avances y contenido exclusivo.",
+    aiTitle: "Asistente de IA 🌱",
+    aiText: "Pregunta sobre el estudio o nuestro juego.",
+    contactTitle: "Contacto",
+    aiAnswer: "Estamos trabajando en nuestro primer videojuego indie. Síguenos en redes sociales para más información."
+  },
+  fr: {
+    tagline: "Un studio indie en pleine croissance 🌱",
+    aboutTitle: "À propos de Garden Studio",
+    aboutText: "Garden Studio est un petit studio indie qui débute. Nous développons notre premier jeu vidéo et partageons notre progression sur les réseaux sociaux.",
+    gameTitle: "Garden Shadows – Bientôt disponible",
+    gameText: "Notre premier jeu indie est en cours de développement. Suivez-nous sur les réseaux sociaux pour les mises à jour.",
+    aiTitle: "Assistant IA 🌱",
+    aiText: "Posez une question sur le studio ou notre jeu.",
+    contactTitle: "Contact",
+    aiAnswer: "Nous développons actuellement notre premier jeu indie. Suivez-nous sur les réseaux sociaux."
+  },
+  de: {
+    tagline: "Ein Indie-Studio, das gerade wächst 🌱",
+    aboutTitle: "Über Garden Studio",
+    aboutText: "Garden Studio ist ein kleines Indie-Studio am Anfang seiner Reise. Wir entwickeln unser erstes Videospiel und teilen Fortschritte in sozialen Netzwerken.",
+    gameTitle: "Garden Shadows – Demnächst",
+    gameText: "Unser erstes Indie-Spiel befindet sich in Entwicklung. Folge uns in den sozialen Netzwerken für Updates.",
+    aiTitle: "KI-Assistent 🌱",
+    aiText: "Stelle eine Frage über das Studio oder unser Spiel.",
+    contactTitle: "Kontakt",
+    aiAnswer: "Wir arbeiten an unserem ersten Indie-Spiel. Folge uns in den sozialen Netzwerken."
+  }
+};
+
+const languageSelect = document.getElementById('languageSelect');
+function updateLanguage(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = translations[lang][key];
+  });
+}
+
+languageSelect.addEventListener('change', () => updateLanguage(languageSelect.value));
+updateLanguage('en');
+
+const input = document.getElementById('aiInput');
+const responseBox = document.getElementById('aiResponse');
+
+input.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && input.value.trim() !== '') {
+    const lang = languageSelect.value;
+    responseBox.style.display = 'block';
+    responseBox.textContent = translations[lang].aiAnswer;
+    input.value = '';
+  }
+});
+</script>
+
+</body>
+</html>
